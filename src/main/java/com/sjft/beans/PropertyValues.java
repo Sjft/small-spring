@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 属性集合
  * @author Sjft
  * @date 2021/07/28 17:45
  **/
