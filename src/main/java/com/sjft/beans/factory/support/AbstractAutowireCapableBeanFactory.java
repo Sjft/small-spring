@@ -1,7 +1,11 @@
 package com.sjft.beans.factory.support;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.sjft.beans.BeansException;
+import com.sjft.beans.PropertyValue;
+import com.sjft.beans.PropertyValues;
 import com.sjft.beans.factory.config.BeanDefinition;
+import com.sjft.beans.factory.config.BeanReference;
 
 import java.lang.reflect.Constructor;
 
@@ -18,8 +22,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Object bean;
         try {
             bean = createBeanInstance(beanDefinition, beanName, args);
-            // todo 给 bean 填充属性
-
+            // 给 bean 填充属性
+            applyPropertyValues(beanName, bean, beanDefinition);
 
         } catch (Exception e) {
             throw new BeansException("instantiation of bean failed", e);
@@ -44,7 +48,23 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     }
 
     protected void applyPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition) {
+        try {
+            PropertyValues propertyValues = beanDefinition.getPropertyValues();
+            for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
+                String name = propertyValue.getName();
+                Object value = propertyValue.getValue();
+                if (value instanceof BeanReference) {
+                    // 获取 bean 依赖的对象的实例化
+                    BeanReference beanReference = (BeanReference) value;
+                    value = getBean(beanReference.getBeanName());
+                }
 
+                // 属性填充
+                BeanUtil.setFieldValue(bean, name, value);
+            }
+        } catch (BeansException e) {
+            throw new BeansException("Error setting property values:" + beanName);
+        }
     }
 
     public InstantiationStrategy getInstantiationStrategy() {

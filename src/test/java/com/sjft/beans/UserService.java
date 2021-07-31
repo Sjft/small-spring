@@ -6,19 +6,11 @@ package com.sjft.beans;
  **/
 public class UserService {
 
-    private String name;
+    private Integer uId;
 
-    public UserService(String name) {
-        this.name = name;
-    }
+    private UserDao userDao;
 
     public void queryUserInfo() {
-        System.out.println("查询用户信息:" + name);
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        return sb.append(name).toString();
+        System.out.println("查询用户信息：" + userDao.getUserName(uId));
     }
 }
