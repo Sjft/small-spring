@@ -1,4 +1,4 @@
-package com.sjft.util;
+package com.sjft.utils;
 
 /**
  * @author sift

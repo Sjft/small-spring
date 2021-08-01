@@ -7,6 +7,7 @@ import com.sjft.beans.UserService;
 import com.sjft.beans.factory.config.BeanDefinition;
 import com.sjft.beans.factory.config.BeanReference;
 import com.sjft.beans.factory.support.DefaultListableBeanFactory;
+import com.sjft.beans.factory.xml.XmlBeanDefinitionReader;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -46,5 +47,17 @@ public class ApiTest {
 
         UserService userService = (UserService) beanFactory.getBean("userService", "sjft");
         userService.queryUserInfo();
+    }
+
+    @Test
+    void test_xml() {
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+
+        // 读取配置文件注册 bean
+        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(beanFactory);
+        reader.loadBeanDefinitions("classpath:spring.xml");
+
+        UserService userService = beanFactory.getBean("userService", UserService.class);
+        System.out.println("result: " + userService.queryUserInfo());
     }
 }

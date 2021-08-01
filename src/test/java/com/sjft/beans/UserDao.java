@@ -9,15 +9,15 @@ import java.util.Map;
  */
 public class UserDao {
 
-    private static Map<Integer, String> hashMap = new HashMap<Integer, String>();
+    private static Map<String, String> hashMap = new HashMap();
 
     static {
-        hashMap.put(0, "王也");
-        hashMap.put(1, "张灵玉");
-        hashMap.put(2, "诸葛青");
+        hashMap.put("0", "王也");
+        hashMap.put("1", "张灵玉");
+        hashMap.put("2", "诸葛青");
     }
 
-    public String getUserName(Integer id) {
+    public String getUserName(String id) {
         return hashMap.get(id);
     }
 }
