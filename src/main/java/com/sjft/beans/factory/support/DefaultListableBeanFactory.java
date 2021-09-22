@@ -3,7 +3,6 @@ package com.sjft.beans.factory.support;
 import com.sjft.beans.BeansException;
 import com.sjft.beans.factory.ConfigurableListableBeanFactory;
 import com.sjft.beans.factory.config.BeanDefinition;
-import com.sjft.beans.factory.config.BeanPostProcessor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,11 +23,6 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
             throw new BeansException("No bean named '" + beanName + "' is defined");
         }
         return beanDefinition;
-    }
-
-    @Override
-    public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor) {
-
     }
 
     @Override
