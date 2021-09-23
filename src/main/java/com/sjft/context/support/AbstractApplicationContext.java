@@ -1,4 +1,4 @@
-package com.sjft.beans.factory.support;
+package com.sjft.context.support;
 
 import com.sjft.beans.BeansException;
 import com.sjft.beans.factory.ConfigurableListableBeanFactory;
@@ -31,6 +31,16 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
 
         // 5. 提前实例化单例 bean 对象
         beanFactory.preInstantiateSingletons();
+    }
+
+    @Override
+    public void registerShutdownHook() {
+        Runtime.getRuntime().addShutdownHook(new Thread(this::close));
+    }
+
+    @Override
+    public void close() {
+        getBeanFactory().destroySingletons();
     }
 
     protected abstract void refreshBeanFactory() throws BeansException;

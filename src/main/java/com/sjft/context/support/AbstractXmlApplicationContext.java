@@ -1,4 +1,4 @@
-package com.sjft.context;
+package com.sjft.context.support;
 
 import com.sjft.beans.factory.support.DefaultListableBeanFactory;
 import com.sjft.beans.factory.xml.XmlBeanDefinitionReader;

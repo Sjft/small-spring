@@ -10,7 +10,7 @@ import com.sjft.beans.factory.support.DefaultListableBeanFactory;
 import com.sjft.beans.factory.xml.XmlBeanDefinitionReader;
 import com.sjft.common.MyBeanFactoryPostProcessor;
 import com.sjft.common.MyBeanPostProcessor;
-import com.sjft.context.ClassPathXmlApplicationContext;
+import com.sjft.context.support.ClassPathXmlApplicationContext;
 import org.junit.jupiter.api.Test;
 
 /**
